@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>20051522D_Drink Ordering System</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="order.js"></script>
+    </head>
+    <body>
+        <header class="fs-1 p-3 bg-dark text-light text-center">Drink Ordering System</header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarToggler">
+                    <ul class="navbar-nav gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active link-primary fw-semibold" aria-current="page" href="order.html">Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reserve.html">Reserve a Table</a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-4">
+            <form method="post" name="form" id="form">
+                <div class="row mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="row mb-3">
+                    <label for="drink" class="form-label">Drink:</label>
+                    <select id="drink" class="form-select" name="drink" onchange="calculatePrice()">
+                        <option selected>Please Select</option>
+                        <option value="bubble-milktea">Bubble Milktea</option>
+                        <option value="iced-latte">Iced Latte</option>
+                        <option value="pineapple-juice">Pineapple Juice</option>
+                    </select>
+                </div>
+                <div class="row mb-3 d-inline-block d-lg-flex">
+                    <div class="col d-flex d-lg-block">
+                        <label for="size" class="form-label">Size:</label>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="size" value="smallSize" id="smallSize" autocomplete="off" onchange="calculatePrice()">
+                            <label class="btn btn-outline-primary" for="smallSize">Small</label>
+                        </div>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="size" value="mediumSize" id="mediumSize" autocomplete="off" onchange="calculatePrice()">
+                            <label class="btn btn-outline-primary" for="mediumSize">Medium</label>
+                        </div>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="size" value="largeSize" id="largeSize" autocomplete="off" onchange="calculatePrice()">
+                            <label class="btn btn-outline-primary" for="largeSize">Large</label>
+                        </div>
+                    </div>
+                    <div class="col d-flex d-lg-block">
+                        <label for="ice" class="form-label">Ice:</label>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="ice" id="normalice" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="normalice">Normal</label>
+                        </div>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="ice" id="lessice" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="lessice">Less</label>
+                        </div>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="ice" id="withoutice" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="withoutice">Without Ice</label>
+                        </div>
+                    </div>
+                    <div class="col d-flex d-lg-block">
+                        <label for="sweetness" class="form-label">Sweetness:</label>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="sweetness" id="100%" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="100%">100%</label>
+                        </div>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="sweetness" id="50%" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="50%">50%</label>
+                        </div>
+                        <div class="py-1 mb-2 ms-2 ms-lg-0">
+                            <input type="radio" class="btn-check" name="sweetness" id="0%" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="0%">0%</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 fs-4">Price: $<span id="price">0</span></div>
+                <button type="button" class="btn btn-primary" onclick="placeOrder(event)">Place Order</button>
+                <button type="reset" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+            </form>
+        </div>
+        <footer class="fs-6 p-3 bg-dark text-light text-center fixed-bottom">© 20051522D Tai Yuk Fu - EIE4432 Lab 2 Project</footer>
+    </body>
+</html>
